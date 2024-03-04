@@ -561,6 +561,10 @@ class e3gnn_smiles_clip_e2e(nn.Module):
                 mean=torch.zeros_like(h_clip), std=noise_scale * torch.ones_like(h_clip)
             )
         h_token = self.point_clip_to_special_tokens(h_clip)
+        # Add Stefan
+        print("h_token", h_token.shape)
+        print("h_token", h_token)
+        
         if do_suffix:
             suffstr = "[SUFFIX][MIDDLE]"
         else:
