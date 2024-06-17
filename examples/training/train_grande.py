@@ -1,6 +1,12 @@
 # Offline training of an end-to-end clip
 # Encoder/decoder.
 # Try to return to torch_emb=False
+
+# define parent path for COATI
+import sys
+import os
+sys.path.append(os.path.abspath("/Users/stefanhangler/Documents/Uni/Msc_AI/3_Semester/Seminar_Practical Work/Code.nosync/COATI"))
+
 import torch.multiprocessing as mp
 from coati.training.train_coati import train_autoencoder, do_args
 import os
@@ -65,7 +71,7 @@ def main():
     # where to save model checkpoints
     args.model_dir = "./model_ckpts/"
     # where to save dataset cache
-    args.data_dir = "./"
+    args.data_dir = "/Volumes/PHILIPS/"
     args.model_filename = "coati_grande"
 
     COATI_dataset(cache_dir=args.data_dir).get_data_pipe()
@@ -74,7 +80,7 @@ def main():
     args.world_size = args.gpus * args.nodes
     os.environ["MASTER_ADDR"] = "localhost"
     os.environ["MASTER_PORT"] = "8899"
-    mp.spawn(train_autoencoder, nprocs=args.gpus, args=(args,))
+    #mp.spawn(train_autoencoder, nprocs=args.gpus, args=(args,))
     #########################################################
 
 

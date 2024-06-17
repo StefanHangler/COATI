@@ -89,6 +89,9 @@ def clip_ar_xform(
     [ELEMENT][Tk6][Tk6][ELEMENT][Tk1][Tk6][SMILES][c1][cccc][c1][STOP] becomes:
     [PREFIX][ELEMENT][Tk6][Tk6][ELEMENT][Tk1][Tk6][SMILES][c1][SUFFIX][c1][MIDDLE][cccc]
     """
+    # print first entry in batch
+    print("batch in clip_ar_xform:\n", batch)
+
     assert "smiles" in batch
     assert "source_collection" in batch
     assert "atoms" in batch

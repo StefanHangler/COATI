@@ -32,6 +32,8 @@ def sync_s3_to_local(bucket_name, prefix, verbose=True):
     # cache in cwd by default.
     cache_dir = os.getenv("S3_CACHE_DIR", ".")
 
+    print(f"cache_dir: {cache_dir}")
+
     # Generate local file path
     local_file_path = os.path.join(cache_dir, prefix)
     local_file_dir = os.path.dirname(local_file_path)
@@ -39,8 +41,12 @@ def sync_s3_to_local(bucket_name, prefix, verbose=True):
     # Make sure the directory exists
     os.makedirs(local_file_dir, exist_ok=True)
 
+    print(f"local_file_path: {local_file_path}")
+
     # Get object summary for the file on s3
     s3_obj = s3.Object(bucket_name, prefix)
+
+    print(f"s3_obj: {s3_obj}")
 
     # If local file exists, compare modification times
     if os.path.exists(local_file_path):
