@@ -1,6 +1,6 @@
-from dataset import download_and_extract_data, list_datasets
-from data_utils import prepare_data
-from model_utils import load_models, execute_linear_probing
+from downstream_tasks.dataset import download_and_extract_data, list_datasets
+from downstream_tasks.data_utils import prepare_data
+from downstream_tasks.model_utils import load_models, execute_linear_probing
 
 import numpy as np
 import os
@@ -23,18 +23,20 @@ def main():
     model_configurations = {
         'coati_grande': {'encoder': models['coati_grande_encoder'], 'tokenizer': models['coati_grande_tokenizer']},
         'coati_autoreg': {'encoder': models['coati_autoreg_encoder'], 'tokenizer': models['coati_autoreg_tokenizer']},
+        'coati2': {'encoder': models['coati2_encoder'], 'tokenizer': models['coati2_tokenizer']},
         'clamp': {'encoder': models['clamp_model']}  # No tokenizer needed
     }
 
     # Process each dataset with each model configuration
     for dataset_name, activity_path, smiles_path in datasets:
-        combined_df = prepare_data(smiles_path, activity_path)
-        data_records = combined_df.to_dict('records')
+        data = prepare_data(smiles_path, activity_path)
 
         for model_key, model_details in model_configurations.items():
             print(f"Processing {model_key} for dataset {dataset_name}")
-            model_details['name'] = model_key  # Include model name in details for clarity in processing
-            execute_linear_probing(data_records, combined_df, model_details, dataset_name)
+            model_details['name'] = model_key 
+            execute_linear_probing(data, model_details, dataset_name, ['logistic_regression', 'due'])
 
 if __name__ == "__main__":
+    # pip install -r requirements.txt
+
     main()
