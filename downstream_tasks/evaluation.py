@@ -1,20 +1,21 @@
 from torch.utils.data import TensorDataset, DataLoader
 import numpy as np
 import torch
-from ignite.engine import Events, Engine
-from ignite.metrics import Average, Loss
-from ignite.contrib.handlers import ProgressBar
-import gpytorch
-from gpytorch.mlls import VariationalELBO
-from gpytorch.likelihoods import GaussianLikelihood
-from due.dkl import DKL, GP, initial_values
-from due.fc_resnet import FCResNet
+import os
+# from ignite.engine import Events, Engine
+# from ignite.metrics import Average, Loss
+# from ignite.contrib.handlers import ProgressBar
+# import gpytorch
+# from gpytorch.mlls import VariationalELBO
+# from gpytorch.likelihoods import GaussianLikelihood
+# from due.dkl import DKL, GP, initial_values
+# from due.fc_resnet import FCResNet
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, average_precision_score
 import pandas as pd
 from typing import Callable, Dict, Any
-from coati.models.regression.basic_due import basic_due
+# from coati.models.regression.basic_due import basic_due
 
 def bootstrap_metric(function, n: int=500):
     "wrapper for metrics to bootstrap e.g. calc std"
@@ -125,7 +126,6 @@ def perform_model_analysis(
 
     # Save or append the results to a CSV file
     # Check if the file exists to decide whether to write headers or not
-    import os
     if os.path.exists(results_file):
         results_df.to_csv(results_file, mode='a', header=False, index=False)
     else:

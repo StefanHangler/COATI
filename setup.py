@@ -24,6 +24,7 @@ requirements = [
     "botocore",
     "tqdm",
     "due @ git+https://github.com/y0ast/DUE.git",
+    "fcd @ git+https://github.com/insilicomedicine/fcd_torch.git"
 ]
 
 setup(

@@ -1,0 +1,3 @@
+[submodule "fcd_torch"]
+	path = fcd_torch
+	url = https://github.com/insilicomedicine/fcd_torch.git

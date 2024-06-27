@@ -36,6 +36,16 @@ class COATI_dataset:
 
     def partition_routine(self, row):
         """ """
+        tore = ["raw"]
+
+        if row["partition"] == 'train':
+            tore.append("train")
+        elif row["partition"] == 'valid':
+            tore.append("valid")
+        else:
+            tore.append("test")
+
+        return tore
         if not "mod_molecule" in row:
             tore = ["raw"]
             tore.append("train")
@@ -53,6 +63,7 @@ class COATI_dataset:
                 tore.append("test")
 
             return tore
+        
 
     def get_data_pipe(
         self,

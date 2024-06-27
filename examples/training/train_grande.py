@@ -80,7 +80,7 @@ def main():
     args.world_size = args.gpus * args.nodes
     os.environ["MASTER_ADDR"] = "localhost"
     os.environ["MASTER_PORT"] = "8899"
-    #mp.spawn(train_autoencoder, nprocs=args.gpus, args=(args,))
+    mp.spawn(train_autoencoder, nprocs=args.gpus, args=(args,))
     #########################################################
 
 
